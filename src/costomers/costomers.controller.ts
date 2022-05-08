@@ -41,7 +41,7 @@ export class CostomersController {
   @Get('/search/:id')
   searchCostomerById(@Param('id', ParseIntPipe) id: number) {
     const costomer = this.costomersService.searchCostomerById(id);
-    if (costomer) return;
+    if (costomer) return costomer;
     else throw new NotFoundException();
   }
 
