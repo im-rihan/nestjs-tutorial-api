@@ -17,7 +17,7 @@ import { CreateCostomerDto } from './dto/create-costomer.dto';
 
 @Controller('costomers')
 export class CostomersController {
-  constructor(private costomersService: CostomersService) {}
+  constructor(private readonly costomersService: CostomersService) {}
 
   @Get('')
   getAllCostomers() {

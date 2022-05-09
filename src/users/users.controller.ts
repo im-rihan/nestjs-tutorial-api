@@ -10,6 +10,7 @@ import {
   ParseIntPipe,
   Post,
   UseFilters,
+  UseGuards,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
@@ -19,10 +20,13 @@ import { UsersService } from './users.service';
 import { UserNotFoundException } from './Exceptions/user-not-found.exception';
 import { HttpStatusFilter } from './filters/http-exception.filter';
 import { CreateUserDto } from './dto/create-user.dto';
+import { AuthenticatedGuard } from '../auth/utils/localGuard';
 
 @Controller('users')
 export class UsersController {
-  constructor(@Inject('USER_SERVICE') private usersService: UsersService) {}
+  constructor(
+    @Inject('USER_SERVICE') private readonly usersService: UsersService,
+  ) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('')
@@ -51,5 +55,11 @@ export class UsersController {
   @UsePipes(ValidationPipe)
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('all-users')
+  getAllRepository() {
+    return this.usersService.getALlUserRepository();
   }
 }

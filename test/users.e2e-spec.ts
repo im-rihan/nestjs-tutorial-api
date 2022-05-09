@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('users (e2e) test', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -16,7 +16,14 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer()).get('/api/').expect(404);
+  it('should create anew user', () => {
+    return request(app.getHttpServer())
+      .post('/api/users/create')
+      .send({
+        username: 'rihanmohammed',
+        password: '1234567890',
+        email: 'rihan@gmail.com',
+      })
+      .expect(201);
   });
 });

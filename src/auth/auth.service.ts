@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { comparePassword } from 'src/utils/bcrypt';
+import { comparePassword } from '../utils/bcrypt';
 import { UsersService } from './../users/users.service';
 
 @Injectable()
