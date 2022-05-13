@@ -15,7 +15,7 @@ import entities from './typeorm/index';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '78626458',
+      password: 'root',
       database: 'nestjs_tutorial_db',
       entities,
       synchronize: true,
